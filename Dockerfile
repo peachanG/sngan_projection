@@ -1,4 +1,4 @@
-FROM nvidia/cuda:9.0-cudnn7-devel
+FROM nvidia/cuda:8.0-cudnn5-devel
 
 COPY badproxy /etc/apt/apt.conf.d/99fixbadproxy
 
@@ -14,11 +14,11 @@ RUN apt-get install -y libjpeg-dev libtiff-dev libjasper-dev libpng-dev \
                        libv4l-dev libatlas-base-dev gfortran libx264-dev
 
 RUN pip3 install --upgrade pip
-RUN pip3 install pandas h5py flask imagehash==3.4 matplotlib Pillow scikit-learn jupyter
 
 WORKDIR /work
 
 COPY . /work
 RUN pip3 install -r requirements.txt
+RUN pip3 install matplotlib jupyter
 
 EXPOSE 8888
